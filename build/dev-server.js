@@ -13,7 +13,7 @@ import { bigFont } from './utils'
 webpackConfig.devtool = 'source-map'
 
 // 热加载
-const hotclient = [
+const hotClient = [
   'webpack-hot-middleware/client?noInfo=true&reload=true',
   // "css-hot-loader?fileMap='../css/{fileName}"
 ]
@@ -21,13 +21,13 @@ if (typeof webpackConfig.entry == 'object') {
   Object.keys(webpackConfig.entry).forEach((name) => {
     const value = webpackConfig.entry[name]
     if (Array.isArray(value)) {
-      value.unshift(...hotclient)
+      value.unshift(...hotClient)
     } else {
-      webpackConfig.entry[name] = [...hotclient, value]
+      webpackConfig.entry[name] = [...hotClient, value]
     }
   })
 } else {
-  webpackConfig.entry = [...hotclient, webpackConfig.entry]
+  webpackConfig.entry = [...hotClient, webpackConfig.entry]
 }
 
 const webpackCompiler = webpack(webpackConfig)
